@@ -1,0 +1,85 @@
+#define LED_ROJO_1 13
+#define LED_ROJO_2 12
+#define LED_AMARILLO_1 11
+#define LED_AMARILLO_2 9
+#define LED_VERDE_1 3
+#define LED_VERDE_2 2
+#define LED_ROJO_3 10
+#define LED_AMARILLO_3 8
+#define LED_VERDE_3 4
+#define BUZZER_ROJO 5
+
+void setup()
+{
+ pinMode(LED_ROJO_1, OUTPUT);
+ pinMode(LED_VERDE_1, OUTPUT);
+ pinMode(LED_AMARILLO_1,OUTPUT);
+ pinMode(LED_ROJO_2, OUTPUT);
+ pinMode(LED_VERDE_2, OUTPUT);
+ pinMode(LED_AMARILLO_2,OUTPUT);
+ pinMode(LED_ROJO_3, OUTPUT);
+ pinMode(LED_VERDE_3, OUTPUT);
+ pinMode(LED_AMARILLO_3,OUTPUT);
+ pinMode(BUZZER_ROJO,OUTPUT);
+
+ Serial.begin(9600);
+}
+// FUNCIONES
+ 
+//Enciende los led Rojos
+//llama a la funcion que prende el buzzer
+//y apaga el led al finalizar de sonar buzzer.
+void  prendeApagaRojo(){
+	digitalWrite(LED_ROJO_1,1);
+  	digitalWrite(LED_ROJO_2,1);
+  	digitalWrite(LED_ROJO_3,1);
+  	prendeBuzzer(15,500, 1000, 2000);
+    digitalWrite(LED_ROJO_1,0);
+    digitalWrite(LED_ROJO_2,0);
+  	digitalWrite(LED_ROJO_3,0);
+}
+//Enciende los led Amarillos
+//llama a la funcion que prende el buzzer
+//y apaga el led al finalizar de sonar buzzer.
+
+void  prendeApagaAmarillo (){
+  	digitalWrite(LED_AMARILLO_1,1);
+  	digitalWrite(LED_AMARILLO_2,1);
+  	digitalWrite(LED_AMARILLO_3,1);
+  	prendeBuzzer (5,500,500,1000);
+  	digitalWrite(LED_AMARILLO_1,0);
+  	digitalWrite(LED_AMARILLO_2,0);
+  	digitalWrite(LED_AMARILLO_3,0);
+}
+
+//Enciende los led verde
+//y apaga el led al finalizar el parametro timer deseado.
+void  prendeApagaVerde (int timer_Verde){
+  	digitalWrite(LED_VERDE_1,1);
+    digitalWrite(LED_VERDE_2,1);
+  	digitalWrite(LED_VERDE_3,1);
+  	delay(timer_Verde);
+    digitalWrite(LED_VERDE_1,0);
+  	digitalWrite(LED_VERDE_2,0);
+  	digitalWrite(LED_VERDE_3,0);
+   	
+}
+//Esta funcion es la encargada en prender y apagar el buzzer.
+// Para definir el tiempo que dure sonando se debe dividir el
+//delay sobre la cantidad de iteraciones que se deseen.
+void prendeBuzzer(int numIteraciones,int tono,
+                      int duracionSonido,int tiempoSilencio){ 
+    for (int i = 0; i < numIteraciones; i++){
+    tone(5, tono, duracionSonido);
+    delay(tiempoSilencio);
+  	}
+ }
+void loop()
+{
+	prendeApagaRojo();
+  	
+  	prendeApagaAmarillo();
+  
+  	prendeApagaVerde(45000);
+  
+}
